@@ -1,0 +1,7 @@
+node_modules/
+share/
+*.cfg
+lib/
+include/
+bin/
+
