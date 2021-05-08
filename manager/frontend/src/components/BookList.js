@@ -34,9 +34,6 @@ class BookList extends Component{
         this.setState({ books: booksList });
     });
 
-    function createData(name, calories, fat, carbs, protein) {
-      return { name, calories, fat, carbs, protein };
-    }
 }
 
 

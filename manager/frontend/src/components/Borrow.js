@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab';
 import { Grid, Typography, Button } from '@material-ui/core';
+import ScanButton from './ScanButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Borrow = () => {
     const classes = useStyles();
+
+
     return (
         <div>
             <Grid container direction="column">
@@ -34,55 +37,7 @@ const Borrow = () => {
               </Grid>
               <Grid item xs={12}>
     <form className={classes.root} noValidate autoComplete="off">
-      <Autocomplete
-      id="country-select-demo"
-      style={{ width: 260 }}
-      classes={{
-        option: classes.option,
-      }}
-      autoHighlight
-      getOptionLabel={(option) => option.label}
-      renderOption={(option) => (
-        <React.Fragment>
-          {option.label} ({option.code})
-        </React.Fragment>
-      )}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Book Title"
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
-          }}
-        />
-      )}
-    />
-    <Button color="primary" size="small">search by subject</Button>
-          <Autocomplete
-      id="country-select-demo"
-      style={{ width: 260 }}
-      classes={{
-        option: classes.option,
-      }}
-      autoHighlight
-      getOptionLabel={(option) => option.label}
-      renderOption={(option) => (
-        <React.Fragment>
-          {option.label} ({option.code})
-        </React.Fragment>
-      )}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Student Ref Code"
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
-          }}
-        />
-      )}
-    /><Button color="primary" size="small">search by name</Button>
+
     </form>
     <Grid item container direction="row" xs={12} className={classes.root}>
 
@@ -93,9 +48,7 @@ const Borrow = () => {
         </Button>
         </Grid>
         <Grid item>
-            <Button variant="contained" color="primary">
-                Scan
-            </Button>
+          <ScanButton />
         </Grid>
 
     </Grid>
