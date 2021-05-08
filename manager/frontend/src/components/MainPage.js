@@ -3,6 +3,7 @@ import Entry from './Entry';
 import Return from './Return';
 import Borrow from './Borrow';
 import Student from './Student';
+import BookList from './BookList';
 import { Grid, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {BrowserRouter as Router,
@@ -44,6 +45,9 @@ const MainPage = () => {
                     <Grid item>
                         <Link to="/enter-student"><Button variant="outlined" color="primary">Enter Student</Button></Link>
                     </Grid>
+                    <Grid item>
+                        <Link to="/book-list"><Button variant="outlined" color="primary">View Books</Button></Link>
+                    </Grid>
                 </Grid>
 
                 <Switch>
@@ -58,6 +62,9 @@ const MainPage = () => {
           </Route>
           <Route exact path="/enter-student">
               <Student />
+          </Route>
+          <Route exact path="/book-list">
+              <BookList />
           </Route>
         </Switch>
 
