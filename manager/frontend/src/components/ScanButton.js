@@ -1,23 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@material-ui/core';
 
 
 
-const scanBook = () => {
-    fetch('/api/scan')
-    .then((response) => response.json())
-    .then(book => {
-        console.log(book.data)
-        return book;
-
-    });
-}
 
 const ScanButton = () => {
 
+
+    const {book, setBook } = useState([]);
+
+    const fetchBook = async () => {
+        const { data } = fetch('/api/scan');
+
+        setBook(data);
+    }
+
+    console.log(book)
+
     return(
 
-        <Button onClick={scanBook} variant="contained" color="primary">
+        <Button onClick={fetchBook} variant="contained" color="primary">
         Scan
     </Button>
     )
