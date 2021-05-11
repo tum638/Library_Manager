@@ -39,3 +39,17 @@ body {
   .suggestions li:not(:last-of-type) {
     border-bottom: 1px solid #999;
   }
+
+  .root{
+    margin: 35px;
+    width: 25ch;
+  }
+
+
+.heading {
+    color: #3f51b5;
+}
+
+.button {
+    background: #3f51b5;
+}

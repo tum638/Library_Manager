@@ -4,6 +4,7 @@ import { Grid } from '@material-ui/core';
 import  Nav  from './components/Nav';
 
 import MainPage from './components/MainPage';
+import './components/styles/index.css';
 const App = () => {
   return (
     <div>

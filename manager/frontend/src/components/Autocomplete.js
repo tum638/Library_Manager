@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from "react";
-import './styles/autocomplete.css';
 import { TextField } from '@material-ui/core';
 class Autocomplete extends Component {
   constructor(props) {
@@ -112,6 +111,7 @@ class Autocomplete extends Component {
             onChange={onChange}
             onKeyDown={onKeyDown}
             value={userInput}
+            label="Book Title"
           />
           {suggestionsListComponent}
         </Fragment>
