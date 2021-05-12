@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Autocomplete }  from '@material-ui/lab';
+import  Autocomplete  from './Autocomplete';
 import { Grid, TextField, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,32 +55,7 @@ const Entry = () => {
 <TextField name="subject" label="Subject" value={subject} onChange={(e) => setSub(e.target.value)}/>
 <TextField name="publisher" label="Publisher" value={publisher} onChange={(e) => setPub(e.target.value)}/>
 <Autocomplete
-name="country"
-value={country}
-style={{ width: 260 }}
-options={countries}
-classes={{
-option: classes.option,
-}}
-autoHighlight
-renderOption={(option) => (
-<React.Fragment>
-{option.label} ({option.code})
-</React.Fragment>
-)}
-
-renderInput={(params) => (
-<TextField
-{...params}
-label="Country"
-variant="outlined"
-inputProps={{
-  ...params.inputProps,
-  autoComplete: 'new-password', // disable autocomplete and autofill
-}}
-/>
-)}
-onChange={(e) => setCountry(e.target.value)}
+suggestions={countries}
 />
 </form>
 <Grid item container direction="row" xs={12} className={classes.root}>

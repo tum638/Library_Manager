@@ -1,13 +1,12 @@
 from .scanners import runit
 import requests
 from django.http import JsonResponse, HttpResponse
+import isbnlib
+import json
 
 
 def get_book(request):
-    url = f"https://openlibrary.org/api/books?bibkeys=ISBN:{runit(request)}&jscmd=data&format=json"
-
-
-    a = requests.get(url)
-
-    return JsonResponse(a.json(), safe=False)
+    a = isbnlib.meta(runit(request), service='openl')
+    print(type(a))
+    return JsonResponse(a, safe=False)
 

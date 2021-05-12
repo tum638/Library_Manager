@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Autocomplete } from '@material-ui/lab';
+import Autocomplete from './Autocomplete';
 import { Grid, Button, Typography, TextField} from '@material-ui/core';
 
 
@@ -8,7 +8,7 @@ class Borrow extends Component {
         super(props);
         this.state = { 
             books: [],
-
+            selectedBook: {},
          };
 
 
@@ -19,13 +19,25 @@ class Borrow extends Component {
         .then((response) => response.json())
         .then(booksList => {
             this.setState({ books: booksList });
+
         });
     
+    }
+
+    scanBook = () => {
+        fetch('/api/scan')
+        .then((response) => response.json())
+        .then(selectedbook => {
+            this.setState({selectedBook: selectedbook});
+        })
+        
     }
 
     componentDidMount() {
         this.fetchBooks();
     }
+
+
 
     render() {
         return (
@@ -36,35 +48,12 @@ class Borrow extends Component {
               </Grid>
               <Grid item xs={12}>
     <form className='root' noValidate autoComplete="off">
-    <Autocomplete
-name="country"
-style={{ width: 260 }}
-options={this.state.books.map((book) => (
-  book.title
-))}
-classes={{
-  option: 'suggestion',
-  }}
-autoHighlight
-renderOption={(book) => (
-<React.Fragment>
-{book.title}
-</React.Fragment>
-)}
 
-renderInput={(params) => (
-<TextField
-{...params}
-label="Country"
-variant="outlined"
-inputProps={{
-  ...params.inputProps,
-  autoComplete: 'new-password', // disable autocomplete and autofill
-}}
-/>
-)}
-onChange={(e) => setCountry(e.target.value)}
-/>
+        <Autocomplete selected={this.state.selectedBook.Title} suggestions={this.state.books.map((book) => (
+            book.title
+        ))}
+        />
+
 
     </form>
     <Grid item container direction="row" xs={12} className='root'>
@@ -76,7 +65,7 @@ onChange={(e) => setCountry(e.target.value)}
         </Button>
         </Grid>
         <Grid item>
-            <Button variant="contained" color="primary">
+            <Button onClick={this.scanBook} variant="contained" color="primary">
                 Scan
             </Button>
         </Grid>

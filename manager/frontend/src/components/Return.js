@@ -8,6 +8,8 @@ class Return extends Component {
         super(props);
         this.state = { 
             books: [],
+            selectedBook: {
+            }
 
          };
 
@@ -23,9 +25,18 @@ class Return extends Component {
     
     }
 
+    scanBook = () => {
+        fetch('/api/scan')
+        .then((response) => response.json())
+        .then(selectedbook => {
+            this.setState({selectedBook: selectedbook})
+        })
+    }
+
     componentDidMount() {
         this.fetchBooks();
     }
+
 
     render() {
         return (
@@ -37,6 +48,7 @@ class Return extends Component {
               <Grid item xs={12}>
     <form className='root' noValidate autoComplete="off">
       <Autocomplete
+      value={this.state.selectedBook.title}
       suggestions = {this.state.books.map((book) => (
           book.title
       ))}
@@ -52,7 +64,7 @@ class Return extends Component {
         </Button>
         </Grid>
         <Grid item>
-            <Button variant="contained" color="primary">
+            <Button onClick={this.scanBook} variant="contained" color="primary">
                 Scan
             </Button>
         </Grid>

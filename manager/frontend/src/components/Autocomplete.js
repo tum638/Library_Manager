@@ -1,6 +1,13 @@
-import React, { Component, Fragment } from "react";
-import { TextField } from '@material-ui/core';
-class Autocomplete extends Component {
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+export class Autocomplete extends Component {
+  static propTypes = {
+    suggestions: PropTypes.instanceOf(Array)
+  };
+  static defaultProperty = {
+    suggestions: []
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -14,12 +21,12 @@ class Autocomplete extends Component {
   onChange = e => {
     const { suggestions } = this.props;
     const userInput = e.currentTarget.value;
-  
+
     const filteredSuggestions = suggestions.filter(
       suggestion =>
         suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
-  
+
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions,
@@ -36,10 +43,9 @@ class Autocomplete extends Component {
       userInput: e.currentTarget.innerText
     });
   };
-
   onKeyDown = e => {
     const { activeSuggestion, filteredSuggestions } = this.state;
-  
+
     if (e.keyCode === 13) {
       this.setState({
         activeSuggestion: 0,
@@ -50,16 +56,24 @@ class Autocomplete extends Component {
       if (activeSuggestion === 0) {
         return;
       }
+
       this.setState({ activeSuggestion: activeSuggestion - 1 });
-    }
-    // User pressed the down arrow, increment the index
-    else if (e.keyCode === 40) {
+    } else if (e.keyCode === 40) {
       if (activeSuggestion - 1 === filteredSuggestions.length) {
         return;
       }
+
       this.setState({ activeSuggestion: activeSuggestion + 1 });
     }
   };
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.selected !== nextProps.selected) {
+      this.setState({userInput: nextProps.selected})
+    }
+ }
+
+
 
   render() {
     const {
@@ -73,53 +87,47 @@ class Autocomplete extends Component {
         userInput
       }
     } = this;
-  
     let suggestionsListComponent;
-
     if (showSuggestions && userInput) {
-        if (filteredSuggestions.length) {
-          suggestionsListComponent = (
-            <ul className="suggestions">
-              {filteredSuggestions.map((suggestion, index) => {
-                let className;
-      
-                // Flag the active suggestion with a class
-                if (index === activeSuggestion) {
-                  className = "suggestion-active";
-                }
-                return (
-                  <li className={className} key={suggestion} onClick={onClick}>
-                    {suggestion}
-                  </li>
-                );
-              })}
-            </ul>
-          );
-        } else {
-          suggestionsListComponent = (
-            <div className="no-suggestions">
-              <em>No suggestions available.</em>
-            </div>
-          );
-        }
-      }
+      if (filteredSuggestions.length) {
+        suggestionsListComponent = (
+          <ul className="suggestions">
+            {filteredSuggestions.map((suggestion, index) => {
+              let className;
 
-      return (
-        <Fragment>
-          <TextField
-            type="text"
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            value={userInput}
-            label="Book Title"
-          />
-          {suggestionsListComponent}
-        </Fragment>
-      );
+              if (index === activeSuggestion) {
+                className = "";
+              }
+
+              return (
+                <li key={suggestion} onClick={onClick}>
+                  {suggestion}
+                </li>
+              );
+            })}
+          </ul>
+        );
+      } else {
+        suggestionsListComponent = (
+          <div className="no-suggestions">
+            <em>No suggestions</em>
+          </div>
+        );
+      }
     }
 
-
+    return (
+      <React.Fragment>
+        <input
+          type="search"
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          value={userInput}
+        />
+        {suggestionsListComponent}
+      </React.Fragment>
+    );
+  }
 }
-
 
 export default Autocomplete;
