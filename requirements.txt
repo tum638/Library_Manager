@@ -13,5 +13,6 @@ playsound==1.2.2
 pytz==2021.1
 pyzbar==0.1.8
 requests==2.25.1
+simplejson==3.17.2
 sqlparse==0.4.1
 urllib3==1.26.4
