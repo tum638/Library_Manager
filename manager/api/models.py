@@ -26,8 +26,7 @@ HOUSES = [
 ]
 
 class Student(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    fullname = models.CharField(max_length=100)
     house = models.CharField(max_length=3, choices=HOUSES)
     ref_code = models.CharField(max_length=8)
     borrowed_book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, blank=True, null=True)
@@ -41,4 +40,4 @@ class Student(models.Model):
 
 
     def __str__(self):
-        return self.last_name
+        return self.fullname

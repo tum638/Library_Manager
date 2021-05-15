@@ -12,4 +12,4 @@ class StudentSerializer(ModelSerializer):
     class Meta:
         model = Student
         queryset = Student.objects.all()
-        fields = ['id', 'first_name', 'last_name', 'house', 'ref_code', 'borrowed_book', 'has_returned']
+        fields = ['id', 'fullname', 'house', 'ref_code', 'borrowed_book', 'has_returned']

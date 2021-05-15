@@ -48,11 +48,16 @@ class Return extends Component {
               <Grid item xs={12}>
     <form className='root' noValidate autoComplete="off">
       <Autocomplete
-      value={this.state.selectedBook.title}
+      label="Book Title"
+      value={this.state.selectedBook.Title}
       suggestions = {this.state.books.map((book) => (
           book.title
       ))}
     />
+            <Autocomplete label="Student Name"selected={this.state.selectedBook.Title} suggestions={this.state.books.map((book) => (
+            book.title
+        ))}
+        />
 
     </form>
     <Grid item container direction="row" xs={12} className='root'>

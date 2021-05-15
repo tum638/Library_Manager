@@ -8,11 +8,23 @@ class Borrow extends Component {
         super(props);
         this.state = { 
             books: [],
+            students: [],
             selectedBook: {},
+            selectedStudent: {},
          };
 
 
     }
+    fetchStudents = () => {
+        fetch('/api/students')
+        .then((response) => response.json())
+        .then(stud => {
+            this.setState({ students: stud });
+
+        });
+    
+    }
+
 
     fetchBooks = () => {
         fetch('/api/books')
@@ -35,6 +47,7 @@ class Borrow extends Component {
 
     componentDidMount() {
         this.fetchBooks();
+        this.fetchStudents();
     }
 
 
@@ -49,8 +62,17 @@ class Borrow extends Component {
               <Grid item xs={12}>
     <form className='root' noValidate autoComplete="off">
 
-        <Autocomplete selected={this.state.selectedBook.Title} suggestions={this.state.books.map((book) => (
+        <Autocomplete label="Book Title"selected={this.state.selectedBook.Title} suggestions={this.state.books.map((book) => (
             book.title
+        ))}
+        />
+                <Autocomplete label="Student Name" onChange={(e) => this.setState({
+  book: {
+    selectedStudent: {
+        fullname:  e.target.value} }})}
+
+  selected={this.state.selectedBook.Title} suggestions={this.state.students.map((student) => (
+            student.fullname
         ))}
         />
 

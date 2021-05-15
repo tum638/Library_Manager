@@ -1,3 +1,9 @@
+* {
+
+  border-spacing: 100px;
+
+}
+
 body {
     font-family: sans-serif;
   }

@@ -27,8 +27,8 @@ const Student = () => {
     const classes = useStyles();
     return (
         <div>
-            <Grid container direction="column">
-            <Grid item xs={12} alignItems="center">
+            <Grid container direction="column" alignItems="center">
+            <Grid item xs={12} >
                   <Typography variant="h3" className={classes.heading}> Student </Typography>
               </Grid>
               <Grid item  container xs={12}>

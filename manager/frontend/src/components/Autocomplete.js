@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { TextField } from '@material-ui/core';
 
 export class Autocomplete extends Component {
   static propTypes = {
@@ -118,8 +119,8 @@ export class Autocomplete extends Component {
 
     return (
       <React.Fragment>
-        <input
-          type="search"
+        <TextField
+        label={this.props.label}
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={userInput}
