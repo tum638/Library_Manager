@@ -13,7 +13,7 @@ class ListBooks(ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-class ListStudents(ListAPIView):
+class ListStudents(ListCreateAPIView):
     model = Student
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
@@ -21,3 +21,13 @@ class UpdateStudent(RetrieveUpdateDestroyAPIView):
     model = Student
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+def borrow_book(request, isbn, refcode):
+    isbn = request.POST.get('isbn')
+
+    refcode = request.POST.get('ref_code')
+
+    book = Book.objects.get(isbn=isbn)
+    student = Student.objects.get(ref_code=refcode)
+
+    book.borrow(student)

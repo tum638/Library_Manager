@@ -8,12 +8,26 @@ class Return extends Component {
         super(props);
         this.state = { 
             books: [],
+            students: [],
             selectedBook: {
+            },
+            selectedStudent: {
+
             }
 
          };
 
 
+    }
+
+    fetchStudents = () => {
+        fetch('/api/students')
+        .then((response) => response.json())
+        .then(stud => {
+            this.setState({ students: stud });
+
+        });
+    
     }
 
     fetchBooks = () => {
@@ -35,6 +49,7 @@ class Return extends Component {
 
     componentDidMount() {
         this.fetchBooks();
+        this.fetchStudents();
     }
 
 
@@ -47,15 +62,17 @@ class Return extends Component {
               </Grid>
               <Grid item xs={12}>
     <form className='root' noValidate autoComplete="off">
-      <Autocomplete
-      label="Book Title"
-      value={this.state.selectedBook.Title}
-      suggestions = {this.state.books.map((book) => (
-          book.title
-      ))}
-    />
-            <Autocomplete label="Student Name"selected={this.state.selectedBook.Title} suggestions={this.state.books.map((book) => (
+    <Autocomplete label="Book Title"selected={this.state.selectedBook.Title} suggestions={this.state.books.map((book) => (
             book.title
+        ))}
+        />
+                <Autocomplete label="Student Name" onChange={(e) => this.setState({
+  book: {
+    selectedStudent: {
+        fullname:  e.target.value} }})}
+
+  selected={this.state.selectedStudent.fullname} suggestions={this.state.students.map((student) => (
+            student.fullname
         ))}
         />
 

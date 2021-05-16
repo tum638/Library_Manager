@@ -15,6 +15,25 @@ class Borrow extends Component {
 
 
     }
+
+    borrowBook = () => {
+        fetch('/api/books', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Success:', data);
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+    }
+
+
     fetchStudents = () => {
         fetch('/api/students')
         .then((response) => response.json())
@@ -71,7 +90,7 @@ class Borrow extends Component {
     selectedStudent: {
         fullname:  e.target.value} }})}
 
-  selected={this.state.selectedBook.Title} suggestions={this.state.students.map((student) => (
+  selected={this.state.selectedStudent.fullname} suggestions={this.state.students.map((student) => (
             student.fullname
         ))}
         />
