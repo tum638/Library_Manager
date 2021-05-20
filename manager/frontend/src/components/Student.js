@@ -1,45 +1,36 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { Autocomplete } from '@material-ui/lab';
+import Autocomplete from './Autocomplete';
 import { Grid, Typography, Button } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
 
-  heading: {
-      color: "#3f51b5"
-  },
+class Student extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            fullname: '',
+            refcode: '',
+            house: '',
+            houses: ['CHA', 'CHI', 'MIC', 'PAT'],
+         };
+    }
+    render() {
+        return (
 
-  button: {
-      background: "#3f51b5"
-  }
-
-
-}));
-
-const Student = () => {
-    const classes = useStyles();
-    return (
-        <div>
+            <div>
             <Grid container direction="column" alignItems="center">
             <Grid item xs={12} >
-                  <Typography variant="h3" className={classes.heading}> Student </Typography>
+                  <Typography variant="h3" className='heading'> Student </Typography>
               </Grid>
               <Grid item  container xs={12}>
-              <form className={classes.root} noValidate autoComplete="off">
-              <TextField id="standard-basic" label="Name" />
-      <TextField id="outlined-basic" label="Surname" />
-      <TextField id="outlined-basic" label="Ref Code" />
-      <TextField id="outlined-basic" label="House" />
+              <form className='root' noValidate autoComplete="off">
+              <TextField id="standard-basic" label="Fullname" onChange={(e) => this.setState({fullname: e.target.value})}/>
+      <TextField id="outlined-basic" label="Ref Code" onChange={(e) => this.setState({refcode: e.target.value})}/>
+      <Autocomplete suggestions={this.state.houses} onChange={(e) => this.setState({house: e.target.value})} label="House" selected={this.state.house}/>
       </form>
               </Grid>
-              <Grid item container direction="row" xs={12} className={classes.root}>
+              <Grid item container direction="row" xs={12} className='root'>
 
 <Grid item>
 
@@ -54,7 +45,9 @@ const Student = () => {
             </Grid>
             
         </div>
-    )
+            
+        );
+    }
 }
 
-export default Student
+export default Student;

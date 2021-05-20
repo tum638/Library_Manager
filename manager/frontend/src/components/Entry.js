@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, TextField, Typography, Button } from '@material-ui/core';
+import { Grid, TextField, Typography, Button, InputLabel } from '@material-ui/core';
 import Autocomplete from './Autocomplete';
 
 
@@ -293,26 +293,32 @@ componentDidMount(){
     </Grid>
     <Grid item xs={12}>
 <form className="root" noValidate autoComplete="off">
-<TextField name="title" label="Title" value={this.state.book.Title} onChange={ (e) => addTitle(e.target.value)}/>
-<TextField type="date" name="date" label="Date" InputLabelProps={{ shrink: true }}  value={this.state.book.Date} onChange={(e) => this.setState({book: {Date: e.target.value}})} />
-<TextField name="classnumber" label="Class Number"  value={this.state.book.ClassNumber} onChange={(e) => this.setState({
+<InputLabel htmlFor="title">Title</InputLabel>
+
+<TextField id="title" name="title" value={this.state.book.Title} onChange={ (e) => addTitle(e.target.value)}/>
+<TextField id="date" name="date" label="Date" InputLabelProps={{ shrink: true }}  value={this.state.book.Year} onChange={(e) => this.setState({book: {Date: e.target.value}})} />
+<InputLabel htmlFor="classnumber">Class No</InputLabel>
+<TextField id="classnumber" name="classnumber"  value={this.state.book.ClassNumber} onChange={(e) => this.setState({
   book: {
     ClassNumber: e.target.value
   }
 })}/>
-<TextField name="accnumber" label="Account Number" value={this.state.book.AccountNumber} onChange={(e) => this.setState({book: {AccountNumber: e.target.value}})}/>
-<TextField name="subject" label="Subject" value={this.state.book.Subject} onChange={(e) => this.setState({
+<InputLabel htmlFor="classnumber">Acc No</InputLabel>
+<TextField name="accnumber"  value={this.state.book.AccountNumber} onChange={(e) => this.setState({book: {AccountNumber: e.target.value}})}/>
+<InputLabel htmlFor="classnumber">Author(s)</InputLabel>
+<TextField name="author" value={this.state.book.Authors} onChange={(e) => this.setState({
   book: {
-    Subject: e.target.value
+    Authors: e.target.value
   }
 })}/>
-<TextField name="publisher" label="Publisher" value={this.state.book.Publisher} onChange={(e) => this.setState({
+<InputLabel htmlFor="classnumber">Publisher</InputLabel>
+<TextField name="publisher" value={this.state.book.Publisher} onChange={(e) => this.setState({
   book: {
     Publisher: e.target.value
   }
 })}/>
+<InputLabel htmlFor="classnumber">Country</InputLabel>
 <Autocomplete
-label="Country"
 suggestions={this.state.countries.map((country) => (
   country.label
 ))} selected={this.state.book.country}
