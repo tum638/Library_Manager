@@ -57,11 +57,11 @@ class BookList extends Component{
           {this.state.books.map((book) => (
             <TableRow key={book.id}>
               <TableCell component="th" scope="row">
-                {book.title}
+                {book.Title}
               </TableCell>
               <TableCell align="right">{book.subject}</TableCell>
-              <TableCell align="right">{book.publisher}</TableCell>
-              <TableCell align="right">{book.country}</TableCell>
+              <TableCell align="right">{book.Publisher}</TableCell>
+              <TableCell align="right">{book.Country}</TableCell>
               <TableCell align="right">{book.borrowed.toString()}</TableCell>
             </TableRow>
           ))}

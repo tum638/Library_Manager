@@ -15,6 +15,26 @@ class Student extends Component {
             houses: ['CHA', 'CHI', 'MIC', 'PAT'],
          };
     }
+
+    enterStudent = () =>{
+
+        fetch('/api/scandb')
+        .then((response) => {
+          if (response.status >= 200 && response.status <= 299){
+            return response.json();
+
+          } else{
+            throw Error(response.statusText);
+          }
+         })
+        .then(selectedbook => {
+            this.setState({selectedBook: selectedbook});
+        }).catch((error) => {
+
+          this.setState({error: 'Book not Found'});
+
+        })
+    }
     render() {
         return (
 

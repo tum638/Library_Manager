@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Autocomplete from './Autocomplete';
 import { Grid, Button, Typography, Radio, RadioGroup, TextField, FormControl, FormControlLabel, FormHelperText} from '@material-ui/core';
 import { Link } from 'react-router-dom'
+import { Alert } from '@material-ui/lab';
 
 class Borrow extends Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class Borrow extends Component {
             students: [],
             selectedBook: {},
             selectedStudent: {},
+            error: null,
          };
 
 
@@ -57,13 +59,25 @@ class Borrow extends Component {
     }
 
     scanBook = () => {
-        fetch('/api/scan')
-        .then((response) => response.json())
+        fetch('/api/scandb')
+        .then((response) => {
+          if (response.status >= 200 && response.status <= 299){
+            return response.json();
+
+          } else{
+            throw Error(response.statusText);
+          }
+         })
         .then(selectedbook => {
             this.setState({selectedBook: selectedbook});
+        }).catch((error) => {
+
+          this.setState({error: 'Book not Found'});
+
         })
         
-    }
+      }
+
 
     componentDidMount() {
         this.fetchBooks();
@@ -78,7 +92,7 @@ class Borrow extends Component {
 
 
 
-            <Grid container spacing={1}>
+            <Grid container spacing={1} direction="row">
         <Grid item xs={12} align="center">
           <Typography component="h4" className="heading" variant="h4">
             Borrow Book
@@ -119,6 +133,13 @@ book.title
           >
             Scan
           </Button>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={this.borrowBook}
+          >
+            Borrow
+          </Button>
         </Grid>
         <Grid item xs={12} align="center">
           <Button color="secondary" variant="contained" to="/" component={Link}>
@@ -126,6 +147,7 @@ book.title
           </Button>
         </Grid>
       </Grid>
+     { this.state.error && <Alert severity="error">{this.state.error}</Alert>} 
             
         </div>
         );

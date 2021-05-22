@@ -23,16 +23,16 @@ class Student(models.Model):
         return self.fullname
 
 class Book(models.Model):
-    title = models.CharField(max_length=50)
+    Title = models.CharField(max_length=50)
     acc_no = models.CharField(max_length=12)
     class_no = models.CharField(max_length=12)
     isbn = models.CharField(max_length=32)
-    date = models.DateField(blank=True, auto_now=True)
+    Date = models.DateField(blank=True, auto_now=True)
     borrowed = models.BooleanField(default=False)
     days_left = models.IntegerField(default=14)
     subject = models.CharField(max_length=22)
-    publisher = models.CharField(max_length=32)
-    country = CountryField()
+    Publisher = models.CharField(max_length=32)
+    Country = CountryField()
     borrowed_by = models.ForeignKey(Student, on_delete=models.DO_NOTHING, null=True)
 
     def borrow(self, student):
@@ -41,6 +41,6 @@ class Book(models.Model):
         self.save()
 
     def __str__(self):
-        return self.title
+        return self.Title
 
 

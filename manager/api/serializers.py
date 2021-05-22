@@ -6,7 +6,7 @@ class BookSerializer(ModelSerializer):
     class Meta:
         model = Book
         queryset = Book.objects.all()
-        fields = ['id', 'title', 'acc_no', 'class_no', 'isbn', 'date', 'borrowed', 'days_left', 'subject', 'publisher', 'borrowed_by', 'country']
+        fields = ['id', 'Title', 'acc_no', 'class_no', 'isbn', 'Date', 'borrowed', 'days_left', 'subject', 'Publisher', 'borrowed_by', 'Country']
 
 class StudentSerializer(ModelSerializer):
     class Meta:
