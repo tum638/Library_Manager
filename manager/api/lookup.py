@@ -1,19 +1,21 @@
 from .scanners import runit
-import requests
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 import isbnlib
-import json
 from .models import Book
 from .serializers import BookSerializer
 
 
+
+
 def get_book(request):
-    a = isbnlib.meta(runit(request), service='openl')
+    isbn = runit(request)
+    a = isbnlib.meta(isbn, service='openl')
     print(type(a))
     return JsonResponse(a, safe=False)
 
 def get_from_db(request):
-    book = Book.objects.get(isbn=runit(request))
+    isbn = runit(request)
+    book = Book.objects.get(isbn)
 
 
     serialized_book = BookSerializer(book)
