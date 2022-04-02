@@ -1,23 +1,28 @@
 from django.shortcuts import render
-from rest_framework.generics import ListCreateAPIView, DestroyAPIView, RetrieveUpdateDestroyAPIView, ListAPIView
-from .models import Book, Student
+from .models import Book, Student, Borrow
 from .serializers import *
+from django.http import HttpResponse, JsonResponse
+from rest_framework.generics import ListAPIView
 
-class GetBook(RetrieveUpdateDestroyAPIView):
-    model = Book
+class BooksList(ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    
+class BorrowsList(ListAPIView):
+    queryset = Borrow.objects.all()
+    serializer_class = BorrowSerializer
 
-class ListBooks(ListCreateAPIView):
-    model = Book
-    queryset = Book.objects.all()
-    serializer_class = BookSerializer
+def entry(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        isbn = request.POST['isbn']
+        author = request.POST['author']
+        publisher = request.POST['publisher']
+        
+        book = Book(Title=title, isbn=isbn, Publisher=publisher, author=author)
+        book.save()
+    return JsonResponse({'success': 'true'})
 
-class ListStudents(ListCreateAPIView):
-    model = Student
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
-class UpdateStudent(RetrieveUpdateDestroyAPIView):
-    model = Student
-    queryset = Student.objects.all()
-    serializer_class = StudentSerializer
+def delete(request):
+    book = Book.objects.get(id=request.POST['id'])
+    book.delete()

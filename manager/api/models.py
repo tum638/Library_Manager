@@ -2,6 +2,7 @@ from django.db import models
 
 class Student(models.Model):
     fullname = models.CharField(max_length=200, null=True, blank=True)
+    total_books = models.IntegerField(default=0)
     
     def __str__(self):
         return self.fullname
@@ -11,6 +12,7 @@ class Book(models.Model):
     isbn = models.CharField(max_length=32)
     Publisher = models.CharField(max_length=100)
     borrowed = models.BooleanField(default=False)
+    author = models.CharField(max_length=100)
     
     def __str__(self):
         return self.Title

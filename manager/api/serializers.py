@@ -14,3 +14,9 @@ class StudentSerializer(ModelSerializer):
         queryset = Student.objects.all()
         fields = ['id', 'fullname']
         
+class BorrowSerializer(ModelSerializer):
+    class Meta:
+        model = Borrow
+        queryset = Borrow.objects.all()
+        fields = '__all__'
+        
