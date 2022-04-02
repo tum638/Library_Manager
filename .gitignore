@@ -1,6 +1,7 @@
 node_modules/
 share/
 *.cfg
+*.pyc
 lib/
 include/
 bin/
