@@ -1,15 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
-import Appbar from './components/Appbar'
 
 const Container = styled.div`
-    width: 100%;
-    height: 100%
+    display: flex;
+    height: 100vh;
+`
+const Left = styled.div`
+    display: flex;
+    flex: 1;
+`
+const Right = styled.div`
+    display: flex;
+    flex: 4;
+    background-color: black;
+    height: 96%;
+    width: 97%;
+    margin: 12px;
+    border-radius: 20px;
 `
 
 const App = () => {
   return (
-    <Container><Appbar /></Container>
+      <Container>
+          <Left></Left>
+          <Right></Right>
+      </Container>
   )
 }
 
