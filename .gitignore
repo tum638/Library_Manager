@@ -5,4 +5,4 @@ share/
 lib/
 include/
 bin/
-
+.vscode
