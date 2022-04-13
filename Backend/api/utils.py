@@ -35,9 +35,3 @@ def lookup(code):
     return book_data
         
         
-
-        
-    
-
-    
-lookup(scanner())

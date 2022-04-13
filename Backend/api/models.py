@@ -1,3 +1,4 @@
+
 from django.db import models
 
 
@@ -13,27 +14,37 @@ class Book(models.Model):
     def __str__(self):
         return self.title
     
-    def borrow(self):
-        if self.in_library:
-            self.in_library = False
-            self.save()
-            return True
-        else:
-            return False
+
         
-    def return_book(self):
-        if not self.in_library:
-            self.in_library = True
-            self.save()
-            return True
-        else:
-            return False
+
         
 class Student(models.Model):
     name = models.CharField(max_length=100)
     number_of_books_read = models.IntegerField(default=0)
     current_book = models.ForeignKey(Book, on_delete=models.DO_NOTHING, null=True, blank=True)
     
+    def borrow(self, book):
+        if not self.current_book:
+            book = book
+            if book.in_library:
+                book.in_library = False
+                book.save()
+                self.current_book = book
+                self.number_of_books_read += 1
+                self.save()
+            else:
+                print("Book is not available for borrowing")
+        else:
+            print("cannot borrow more than one book at once")
+    def return_book(self, book):
+        if not self.current_book:
+            print("student does not have book to return")
+        else:
+            book = book
+            book.in_library = True
+            book.save()
+            self.current_book = None
+            self.save()
     def __str__(self):
         return self.name
         
