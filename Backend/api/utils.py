@@ -13,9 +13,9 @@ def scanner():
         for code in decode(frame):
             data = code.data.decode('utf-8')
             if len(data) != 0:
-                return data
                 a = False
-                break
+                return data
+                
         cv2.waitKey(1)
 
 def lookup(code):

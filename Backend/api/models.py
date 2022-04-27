@@ -32,19 +32,24 @@ class Student(models.Model):
                 self.current_book = book
                 self.number_of_books_read += 1
                 self.save()
+                return True
             else:
-                print("Book is not available for borrowing")
+                error = "Book is not available for borrowing"
+                return error
         else:
-            print("cannot borrow more than one book at once")
+            error = "cannot borrow more than one book at once"
+            return error
     def return_book(self, book):
         if not self.current_book:
-            print("student does not have book to return")
+            error = "student does not have book to return"
+            return error
         else:
             book = book
             book.in_library = True
             book.save()
             self.current_book = None
             self.save()
+            return True
     def __str__(self):
         return self.name
         
