@@ -1,7 +1,7 @@
 import cv2
 from pyzbar.pyzbar import decode
 from isbnlib import meta, cover, desc
-from isbnlib.dev._exceptions import DataNotFoundAtServiceError
+from isbnlib.dev._exceptions import DataNotFoundAtServiceError, NotValidISBNError
 
 def scanner():
     cap = cv2.VideoCapture(0)
@@ -31,6 +31,10 @@ def lookup(code):
         book_data['Author'] = book_data['Authors'][0]
     except DataNotFoundAtServiceError:
         book_data = {}
+        book_data['error'] = 'Book not found'
+    except NotValidISBNError:
+        book_data = {}
+        book_data['error'] = 'Code not Valid'
         
     if len(book_data) == 0:
         print("book cannot be added")

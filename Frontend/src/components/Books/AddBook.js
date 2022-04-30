@@ -44,8 +44,8 @@ const ImageContainer = styled.div`
     justify-content: center;
 `
 const Cover = styled.img`
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
 
 `
 
