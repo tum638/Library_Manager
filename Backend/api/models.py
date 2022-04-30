@@ -10,6 +10,7 @@ class Book(models.Model):
     publisher = models.CharField(max_length=200, null=True, blank=True)
     year = models.CharField(max_length=4, null=True, blank=True)
     in_library = models.BooleanField(default=True)
+    cover_url = models.URLField(blank=True)
     
     def __str__(self):
         return self.title

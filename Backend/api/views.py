@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Book, Student
 from .serializers import *
@@ -9,7 +9,8 @@ from rest_framework.views import APIView
 from .utils import scanner, lookup
 
 def scan(request):
-    return JsonResponse(lookup(scanner()))
+    book_data = lookup(scanner())
+    return JsonResponse(book_data, safe=False)
 
 class BooksView(ListCreateAPIView):
     queryset = Book.objects.all()

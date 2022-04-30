@@ -21,17 +21,18 @@ def scanner():
 def lookup(code):
     try:
         book_data = meta(code, service='openl')
+        book_data['description'] = desc(code)
+        book_data['cover_url_list'] = cover(code)
+        book_data['cover_url'] = book_data['cover_url_list']['thumbnail']
+        book_data['parsed_isbn'] = book_data['ISBN-13']
     except DataNotFoundAtServiceError:
         book_data = {}
         
     if len(book_data) == 0:
         print("book cannot be added")
         
-        #description = desc(code)
+        #
         #cover_url = cover(code)
-        #print(book_data)
-        #print(description)
-        #print(cover_url)
     return book_data
         
         
