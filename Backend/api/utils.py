@@ -1,7 +1,8 @@
 import cv2
 from pyzbar.pyzbar import decode
 from isbnlib import meta, cover, desc
-from isbnlib.dev._exceptions import DataNotFoundAtServiceError, NotValidISBNError
+from isbnlib.dev._exceptions import DataNotFoundAtServiceError
+from isbnlib._exceptions import NotValidISBNError
 
 def scanner():
     cap = cv2.VideoCapture(0)
