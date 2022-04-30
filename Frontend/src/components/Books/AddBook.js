@@ -48,6 +48,13 @@ class AddBook extends Component{
         super(props)
         this.state = {
             book: {
+                Title: '',
+                parsed_isbn: '',
+                Author: '',
+                description: '',
+                Publisher: '',
+                Year: '',
+                cover_url: '',
             },
             success: false,
             failure: false,
@@ -56,6 +63,7 @@ class AddBook extends Component{
         this.scan = this.scan.bind(this)
         this.saveBook = this.saveBook.bind(this)
     }
+
     scan(){
         fetch('http://127.0.0.1:8000/api/scan/')
         .then((response) => response.json())
@@ -78,7 +86,7 @@ class AddBook extends Component{
                     description: this.state.book.description,
                     publisher: this.state.book.Publisher,
                     year: this.state.book.Year,
-                    in_library: false,
+                    in_library: true,
                     cover_url: this.state.book.cover_url
                  })
             };
@@ -101,7 +109,12 @@ class AddBook extends Component{
                         </ImageContainer>
                         <FormControls>
                             <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }}} noValidate autoComplete="off">
-                            <TextField id="outlined-error" label="Title" defaultValue={this.state.book.Title}/>
+                            <TextField id="outlined-error" label="Title" value={this.state.book.Title}/>
+                            <TextField id="outlined-error" label="ISBN" value={this.state.book.parsed_isbn} onChange={(e) => this.setState({book: {parsed_isbn: e.target.value}})}/>
+                            <TextField id="outlined-error" label="Author" value={this.state.book.Author} onChange={(e) => this.setState({book: {Author: e.target.value}})}/>
+                            <TextField id="outlined-error" label="Description" value={this.state.book.description} onChange={(e) => this.setState({book: {description: e.target.value}})}/>
+                            <TextField id="outlined-error" label="Publisher" value={this.state.book.Publisher} onChange={(e) => this.setState({book: {Publisher: e.target.value}})}/>
+                            <TextField id="outlined-error" label="Year" value={this.state.book.Year} onChange={(e) => this.setState({book: {Year: e.target.value}})}/>
                             </Box>
                         </FormControls>
                     </Inputs>

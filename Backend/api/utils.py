@@ -25,6 +25,7 @@ def lookup(code):
         book_data['cover_url_list'] = cover(code)
         book_data['cover_url'] = book_data['cover_url_list']['thumbnail']
         book_data['parsed_isbn'] = book_data['ISBN-13']
+        book_data['Author'] = book_data['Authors'][0]
     except DataNotFoundAtServiceError:
         book_data = {}
         
