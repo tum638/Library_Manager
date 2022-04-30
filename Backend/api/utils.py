@@ -32,9 +32,11 @@ def lookup(code):
         book_data['Author'] = book_data['Authors'][0]
     except DataNotFoundAtServiceError:
         book_data = {}
+        book_data['err_stat'] = True
         book_data['error'] = 'Book not found'
     except NotValidISBNError:
         book_data = {}
+        book_data['err_stat'] = True
         book_data['error'] = 'Code not Valid'
         
     if len(book_data) == 0:

@@ -8,7 +8,7 @@ const FormWrapper = styled.div`
     display: flex;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     width: 100%;
-    height: 70vh;
+    height: 100%;
     margin: 20px;
     flex-direction: column;
 
@@ -104,10 +104,6 @@ class AddBook extends Component{
     render(){
         return(
             <Container>
-
-                {this.state.failure? <Alert severity="error">Book entry failed. Try again.</Alert>: <></>}
-                {this.state.success? <Alert severity="success">Book saved!</Alert>: <></>}
-
                 <FormWrapper>
                     <Inputs>
                         <ImageContainer>
@@ -132,6 +128,9 @@ class AddBook extends Component{
                             <SaveIcon />
                         </IconButton>
                     </Actions>
+                    {this.state.book.err_stat? <Alert severity="error">{this.state.book.error}</Alert>: <></>}
+                    {this.state.failure? <Alert severity="error">Book entry failed. Try again.</Alert>: <></>}
+                    {this.state.success? <Alert severity="success">Book saved!</Alert>: <></>}
                 </FormWrapper>
             </Container>
         )
