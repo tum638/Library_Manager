@@ -39,8 +39,14 @@ const FormControls = styled.div`
 const ImageContainer = styled.div`
     flex: 1;
     height: 100%;
+    display: flex;
     align-items: center;
     justify-content: center;
+`
+const Cover = styled.img`
+    height: 200px;
+    width: 200px;
+
 `
 
 class AddBook extends Component{
@@ -82,7 +88,7 @@ class AddBook extends Component{
                 body: JSON.stringify({ 
                     title: this.state.book.Title,
                     isbn: this.state.book.parsed_isbn,
-                    author: this.state.book.Authors[0],
+                    author: this.state.book.Author,
                     description: this.state.book.description,
                     publisher: this.state.book.Publisher,
                     year: this.state.book.Year,
@@ -105,7 +111,7 @@ class AddBook extends Component{
                 <FormWrapper>
                     <Inputs>
                         <ImageContainer>
-                            <img src={this.state.cover_url}/>
+                            <Cover src={this.state.book.cover_url} />
                         </ImageContainer>
                         <FormControls>
                             <Box component="form" sx={{'& .MuiTextField-root': { m: 1, width: '25ch' }}} noValidate autoComplete="off">
@@ -127,9 +133,6 @@ class AddBook extends Component{
                         </IconButton>
                     </Actions>
                 </FormWrapper>
-                {this.state.book.Title}
-                {this.state.book.cover_url}
-
             </Container>
         )
     }

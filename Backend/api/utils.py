@@ -22,8 +22,11 @@ def lookup(code):
     try:
         book_data = meta(code, service='openl')
         book_data['description'] = desc(code)
-        book_data['cover_url_list'] = cover(code)
-        book_data['cover_url'] = book_data['cover_url_list']['thumbnail']
+        try:
+            book_data['cover_url_list'] = cover(code)
+            book_data['cover_url'] = book_data['cover_url_list']['thumbnail']
+        except:
+            book_data['cover_url'] = "https://image.pngaaa.com/732/909732-middle.png"
         book_data['parsed_isbn'] = book_data['ISBN-13']
         book_data['Author'] = book_data['Authors'][0]
     except DataNotFoundAtServiceError:
