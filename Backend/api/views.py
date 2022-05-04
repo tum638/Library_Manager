@@ -25,8 +25,8 @@ class StudentsView(ListCreateAPIView):
     serializer_class = StudentSerializer
    
 def borrow(request):
-    student = Student.objects.get(pk=request.GET['student_id'])
-    book = Book.objects.get(pk=request.GET['book_id'])
+    student = Student.objects.get(pk=request.POST['student_id'])
+    book = Book.objects.get(pk=request.POST['book_id'])
     response = student.borrow(book)
     
     if response:
