@@ -15,7 +15,10 @@ def scan(request):
 class BooksView(ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
-    
+
+class BorrowedBooks(ListCreateAPIView):
+    queryset = Book.objects.filter(in_library=False)
+    serializer_class = BookSerializer    
     
 class StudentsView(ListCreateAPIView):
     queryset = Student.objects.all()

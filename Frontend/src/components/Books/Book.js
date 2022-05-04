@@ -66,6 +66,9 @@ const Book = ({ book }) => {
     const [info, setInfo] = React.useState(false)
     const openInfo = () => setInfo(true)
     const closeInfo = () => setInfo(false)
+    const [form, setForm] = React.useState(false)
+    const openForm = () => setInfo(true)
+    const closeForm = () => setInfo(false)
     const [loading, setLoading] = React.useState(true)
     const handleImageLoad = () => {
         setLoading(false)
@@ -81,7 +84,7 @@ const Book = ({ book }) => {
           </Typography>
         </Header>
         <ImageContainer>
-            {loading? <Skeleton variant="rectangular" width={280} height={300}/> : <Cover src={book.cover_url} onLoad={handleImageLoad}/>}
+            <Cover src={book.cover_url} onLoad={handleImageLoad}/>
         </ImageContainer>
         <Actions>
             <IconButton onClick={openInfo}>
@@ -108,13 +111,16 @@ const Book = ({ book }) => {
                         {book.in_library? <Chip label="Available In Library" color="success" deleteIcon={<Done />} /> : <Chip label="Not Available In Library" color="warning" deleteIcon={<Done />} />}
                     </Left>
                     <Right>
-                        {loading ? <Skeleton variant="rectangular" width={280} height={300} /> : <Cover src={book.cover_url} onLoad={handleImageLoad}/>}
+                        <Cover src={book.cover_url} onLoad={handleImageLoad}/>
                     </Right>
                 </Description>
             </Modal>
-            <IconButton>
+            <IconButton onClick={openForm}>
                 <OutboundIcon />
             </IconButton>
+            <Modal open={form} onClose={closeForm}>
+
+            </Modal>
         </Actions>
     </Container>
   )
