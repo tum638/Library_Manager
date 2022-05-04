@@ -2,6 +2,7 @@ import { Container, Grid, IconButton } from '@mui/material'
 import React, { Component } from 'react'
 import { Book } from './'
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { Link } from 'react-router-dom'
 
 class List extends Component{
     constructor(props){
@@ -24,19 +25,21 @@ class List extends Component{
     }
     render(){
         return(
-            <>
+            <Container>
                 <IconButton onClick={this.getBooks}>
                     <RefreshIcon />
                 </IconButton>
                 <Grid container spacing={3}>
                     {this.state.books.map((book) => (
-                    <Grid item>
+                       
+                    <Grid key={book.id} item lg={4} md={6} sm={12}>
                         <Book book={book} />
-                    </Grid>                        
+                    </Grid> 
+                                           
                     ))}
 
                 </Grid>
-                </>
+                </Container>
 
         )
     }

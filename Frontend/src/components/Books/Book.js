@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Typography, IconButton, Modal, Chip } from '@mui/material'
+import { Typography, IconButton, Modal, Chip, Skeleton } from '@mui/material'
 import { Done, Info } from '@mui/icons-material'
 import OutboundIcon from '@mui/icons-material/Outbound';
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    height: 70vh;
     border-radius: 6%;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `
@@ -20,10 +19,12 @@ const Header = styled.div`
 `
 const ImageContainer = styled.div`
     flex: 2;
+    display: flex;
+    justify-content: center;
 `
 const Cover = styled.img`
     height: 300px;
-    width: 270px;
+    width: 280px;
 
 `
 const Actions = styled.div`
@@ -65,6 +66,10 @@ const Book = ({ book }) => {
     const [info, setInfo] = React.useState(false)
     const openInfo = () => setInfo(true)
     const closeInfo = () => setInfo(false)
+    const [loading, setLoading] = React.useState(true)
+    const handleImageLoad = () => {
+        setLoading(false)
+    }
     return (
     <Container>
         <Header>
@@ -76,7 +81,7 @@ const Book = ({ book }) => {
           </Typography>
         </Header>
         <ImageContainer>
-            <Cover src={book.cover_url} />
+            {loading? <Skeleton variant="rectangular" width={280} height={300}/> : <Cover src={book.cover_url} onLoad={handleImageLoad}/>}
         </ImageContainer>
         <Actions>
             <IconButton onClick={openInfo}>
@@ -103,7 +108,7 @@ const Book = ({ book }) => {
                         {book.in_library? <Chip label="Available In Library" color="success" deleteIcon={<Done />} /> : <Chip label="Not Available In Library" color="warning" deleteIcon={<Done />} />}
                     </Left>
                     <Right>
-                        <Cover src={book.cover_url} />
+                        {loading ? <Skeleton variant="rectangular" width={280} height={300} /> : <Cover src={book.cover_url} onLoad={handleImageLoad}/>}
                     </Right>
                 </Description>
             </Modal>
