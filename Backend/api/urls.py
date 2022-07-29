@@ -1,10 +1,15 @@
-from django.urls import path
-from .views import BorrowedBooks, StudentsView, borrow, scan, BooksView
+from django.urls import path, include
+from .views import BookViewSet, BorrowedBooks, StudentsView, scan, BooksView, StudentViewSet
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register('makstudents', StudentViewSet)
+router.register('makbooks', BookViewSet)
 urlpatterns = [
+    path("", include(router.urls)),
     path('scan/', scan),
-    path('books/', BooksView.as_view()),
+
     path('students/', StudentsView.as_view()),
-    path('borrow/', borrow),
+
     path('books/borrowed/', BorrowedBooks.as_view()),
-    
+
 ]
